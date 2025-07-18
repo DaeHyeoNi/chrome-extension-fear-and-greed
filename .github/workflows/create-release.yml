@@ -23,7 +23,7 @@ jobs:
     - name: Zip extension with version in filename
       run: |
         ZIP_NAME="extension-v${{ steps.version.outputs.version }}.zip"
-        zip -r "$ZIP_NAME" . -x ".git/*" ".github/*"
+        zip -r "$ZIP_NAME" . -x ".git/*" ".github/*" "preview_images/*"
         echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
 
     - name: Create GitHub Release
