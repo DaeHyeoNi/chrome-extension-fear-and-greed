@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Fear & Greed Badge",
+  "version": "1.0.0",
+  "description": "Shows CNN Fear & Greed Index as a badge",
+  "permissions": ["alarms", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Fear & Greed Index Badge",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon_16.png",
+    "32": "icon_32.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  }
+}

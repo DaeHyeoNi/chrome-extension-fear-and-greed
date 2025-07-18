@@ -1,0 +1,38 @@
+name: Create Release on Push
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Fetch tags
+      run: git fetch --tags
+
+    - name: Extract version from manifest.json
+      id: version
+      run: |
+        VERSION=$(jq -r '.version' manifest.json)
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Zip extension with version in filename
+      run: |
+        ZIP_NAME="extension-v${{ steps.version.outputs.version }}.zip"
+        zip -r "$ZIP_NAME" . -x ".git/*" ".github/*"
+        echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v${{ steps.version.outputs.version }}
+        name: Release v${{ steps.version.outputs.version }}
+        body: |
+          자동 생성된 크롬 확장 릴리스입니다. 버전: ${{ steps.version.outputs.version }}
+        files: ${{ env.ZIP_NAME }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

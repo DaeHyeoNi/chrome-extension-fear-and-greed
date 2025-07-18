@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fear & Greed Index</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>공포탐욕지수</h1>
+      <p class="subtitle">CNN Fear & Greed Index</p>
+    </div>
+
+    <div class="index-display">
+      <div class="meter-container">
+        <svg class="meter-svg" viewBox="0 0 200 160">
+          <!-- 배경 반원 -->
+          <path class="meter-bg" d="M 20 100 A 80 80 0 0 1 180 100" stroke="#e0e0e0" stroke-width="16" fill="none"/>
+
+          <!-- 컬러 게이지 -->
+          <defs>
+            <linearGradient id="gauge-gradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#e74c3c"/>
+              <stop offset="25%" stop-color="#f39c12"/>
+              <stop offset="50%" stop-color="#f1c40f"/>
+              <stop offset="75%" stop-color="#2ecc71"/>
+              <stop offset="100%" stop-color="#27ae60"/>
+            </linearGradient>
+          </defs>
+          <path class="meter-gradient" d="M 20 100 A 80 80 0 0 1 180 100" stroke="url(#gauge-gradient)" stroke-width="14" fill="none"/>
+
+          <!-- 바늘 -->
+          <g id="needleGroup" style="transform-origin: 100px 100px; transition: transform 0.8s ease-out;">
+            <line id="needle" x1="100" y1="100" x2="100" y2="38" stroke="#2c3e50" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="100" cy="100" r="6" fill="#34495e"/>
+            <circle cx="100" cy="100" r="3" fill="#2c3e50"/>
+          </g>
+
+          <!-- 값 표시 (y 위치 아래로 이동) -->
+          <text class="meter-value" id="meterValue" x="100" y="138" text-anchor="middle" font-size="20" font-weight="bold" fill="#2c3e50">--</text>
+          <text class="meter-label" id="meterLabel" x="100" y="152" text-anchor="middle" font-size="9" fill="#7f8c8d">로딩 중...</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="details">
+      <div class="detail-item">
+        <span class="detail-label">마지막 업데이트:</span>
+        <span class="detail-value" id="lastUpdate">--</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <button class="refresh-btn" id="refreshBtn">새로고침</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
