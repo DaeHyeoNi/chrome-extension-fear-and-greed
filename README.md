@@ -11,4 +11,5 @@ Fear & Greed Index를 확장 아이콘에서 확인할 수 있는 Chrome 확장 
 ## 미리보기
 
 ![badge](./preview_images/badge.png)
+
 ![popup](./preview_images/popup.png)
