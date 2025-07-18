@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Fear & Greed Badge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shows CNN Fear & Greed Index as a badge",
   "permissions": ["alarms", "storage"],
   "background": {
