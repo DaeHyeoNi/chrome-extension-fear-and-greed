@@ -32,7 +32,7 @@ jobs:
         tag_name: v${{ steps.version.outputs.version }}
         name: Release v${{ steps.version.outputs.version }}
         body: |
-          자동 생성된 크롬 확장 릴리스입니다. 버전: ${{ steps.version.outputs.version }}
+          ${{ steps.version.outputs.version }}
         files: ${{ env.ZIP_NAME }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
