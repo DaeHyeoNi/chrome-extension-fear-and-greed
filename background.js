@@ -88,6 +88,10 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.alarms.create("updateDisplay", { periodInMinutes: 10 });
 });
 
+chrome.runtime.onStartup.addListener(() => {
+  updateDisplay();
+});
+
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "updateDisplay") {
     updateDisplay();
