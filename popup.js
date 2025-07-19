@@ -61,6 +61,9 @@ async function forceUpdateFromBackground() {
 document.addEventListener('DOMContentLoaded', async () => {
   // 캐시된 데이터 먼저 로드
   await loadCachedData();
+
+  await forceUpdateFromBackground();
+  await loadCachedData();
   
   // 새로고침 버튼 이벤트
   document.getElementById('refreshBtn').addEventListener('click', async () => {
