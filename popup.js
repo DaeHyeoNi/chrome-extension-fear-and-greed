@@ -16,19 +16,22 @@ function updateMeter(index) {
 }
 
 function getIndexLabel(index) {
-  if (index <= 25) return "극도의 공포";
-  if (index <= 45) return "공포";
-  if (index <= 55) return "중립";
-  if (index <= 75) return "탐욕";
-  return "극도의 탐욕";
+  if (index < 25) return "Extreme Fear";
+  if (index < 45) return "Fear";
+  if (index < 55) return "Neutral";
+  if (index < 75) return "Greed";
+  return "Extreme Greed";
 }
 
 function formatTime(date) {
-  return date.toLocaleTimeString('ko-KR', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true
-  });
+  const now = new Date();
+  const diffMins = Math.floor((now - date) / (1000 * 60));
+
+  if (diffMins === 0) {
+    return 'Just now';
+  }
+
+  return `${diffMins} minutes ago`;
 }
 
 async function loadCachedData() {
@@ -38,12 +41,12 @@ async function loadCachedData() {
       updateMeter(cached.lastIndex);
       if (cached.lastUpdate) {
         const lastUpdate = new Date(cached.lastUpdate);
-        document.getElementById('lastUpdate').textContent = formatTime(lastUpdate);
+        document.getElementById('lastUpdate').innerHTML = formatTime(lastUpdate);
       }
     } else {
       // 초기값 처리
       document.getElementById('meterValue').textContent = '?';
-      document.getElementById('meterLabel').textContent = '데이터 없음';
+      document.getElementById('meterLabel').textContent = 'Data not available';
     }
   } catch (error) {
     console.error('Error loading cached data:', error);
@@ -72,4 +75,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     await forceUpdateFromBackground();
     await loadCachedData();
   });
+});
+
+document.getElementById('openCnnLink').addEventListener('click', () => {
+  chrome.tabs.create({ url: "https://edition.cnn.com/markets/fear-and-greed" });
 });
