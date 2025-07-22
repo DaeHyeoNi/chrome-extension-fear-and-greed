@@ -30,11 +30,11 @@ function formatTime(date) {
   if (diffMins === 0) {
     return 'Just now';
   } else if (diffMins < 60) {
-    return `${diffMins} minutes ago`;
+    return `${diffMins}m ago`;
   } else {
     const diffHours = Math.floor(diffMins / 60);
     const remainingMins = diffMins % 60;
-    return `${diffHours} hours ${remainingMins} minutes ago`;
+    return `${diffHours}h ${remainingMins}m ago`;
   }
 }
 
